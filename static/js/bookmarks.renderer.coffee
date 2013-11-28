@@ -8,17 +8,18 @@ class BookmarksRenderer
         @model = model
 
     getItemHtml: (item) ->
-        template = [];
-        template.push('<li class="bookmark-item">');
-        template.push('<a class="bookmark-link" href="<%= url %>"><%= title %></a>');
-        template.push('<ul class="bookmark-tags">');
-        template.push('<% _.each(tags, function(tag) { %>');
-        template.push('<li class="bookmark-tag-item">');
-        template.push('<a class="bookmark-tag-link" href="#<%= tag %>"><%= tag %></a>');
-        template.push('</li>');
-        template.push('<% }); %>');
-        template.push('</ul>');
-        template.push('</li>');
+        template = [
+            '<li class="bookmark-item">',
+                '<a class="bookmark-link" href="<%= url %>"><%= title %></a>',
+                '<ul class="bookmark-tags">',
+                    '<% _.each(tags, function(tag) { %>',
+                        '<li class="bookmark-tag-item">',
+                            '<a class="bookmark-tag-link" href="#<%= tag %>"><%= tag %></a>',
+                        '</li>',
+                    '<% }); %>',
+                '</ul>',
+            '</li>'
+        ];
         _.template template.join(''), item
 
     render: (bookmarks) ->

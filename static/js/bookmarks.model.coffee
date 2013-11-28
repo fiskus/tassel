@@ -42,4 +42,7 @@ class BookmarksModel
         _.each @bookmarks, (bookmark) ->
             if bookmark.title.indexOf(value) > -1
                 results.push(bookmark)
+            _.each bookmark.tags, (tag) ->
+                if tag.indexOf(value) > -1
+                    results.push(bookmark)
         results
