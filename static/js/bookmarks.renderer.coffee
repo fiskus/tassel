@@ -14,7 +14,7 @@ class BookmarksRenderer
         template.push('<ul class="bookmark-tags">');
         template.push('<% _.each(tags, function(tag) { %>');
         template.push('<li class="bookmark-tag-item">');
-        template.push('<span class="bookmark-tag-link"><%= tag %></span>');
+        template.push('<a class="bookmark-tag-link" href="#<%= tag %>"><%= tag %></a>');
         template.push('</li>');
         template.push('<% }); %>');
         template.push('</ul>');

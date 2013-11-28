@@ -9,15 +9,17 @@ class Bookmarks
 
     onKey: (event) ->
         searches = @input[0].value.split(' ')
-        _.each searches, @onSearch, @
+        results = _.map searches, @onSearch, @
+        resultsArray = []
+        _.each results, (resultsPart) ->
+            _.each resultsPart, (result) ->
+                resultsArray.push result
+        resultsUniq = _.uniq(resultsArray)
+        @renderer.render resultsUniq
 
     onSearch: (value) ->
         bookmarks = @model.get()
-        results = []
-        _.each bookmarks, (bookmark) ->
-            if bookmark.title.indexOf(value) > -1
-                results.push(bookmark)
-        @renderer.render results
+        @model.filter value
 
     initRenderer: () ->
         @renderer = new BookmarksRenderer()
