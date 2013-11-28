@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bookmarks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bookmarks.css') }}" media="all">
+    <script src="https://raw.github.com/lodash/lodash/2.4.0/dist/lodash.min.js"></script>
+    <script src="{{ url_for('static', filename='js/bookmarks.model.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bookmarks.renderer.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bookmarks.js') }}"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="input-wrapper">
+            <input class="input" type="text" placeholder="Search bookmarks" autofocus/>
+        </div>
+        <div class="bookmarks-list-wrapper">
+            <ul class="bookmarks-list"></ul>
+        </div>
+    </div>
+    <script>
+        var bookmarks = new Bookmarks()
+        bookmarks.init()
+    </script>
+</body>
+</html>
