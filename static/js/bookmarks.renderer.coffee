@@ -21,4 +21,6 @@ class BookmarksRenderer
 
     render: (bookmarks) ->
         html = _.map(bookmarks, @getItemHtml, @)
-        document.querySelectorAll('.bookmarks-list')[0].innerHTML = html.join('')
+        element = document.querySelectorAll('.bookmarks-list')[0]
+        element.innerHTML = html.join('')
+        publish 'rendered.renderer'

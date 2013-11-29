@@ -14,42 +14,46 @@ class BookmarksModel
         $.ajax ajaxSettings
 
     save: (data) ->
-        @bookmarks = data.bookmarks
-        publish 'loaded.model', [@bookmarks]
-        @bookmarks
-
-    get: () ->
-        @bookmarks
+        bookmarks = data.bookmarks
+        @setBookmarks(bookmarks)
 
     multipleFilter: (values) ->
-        results = _.map values, @filter, @
-        allResults = _.flatten(results, true)
+        rawResults = _.map values, @filter, @
+        allResults = _.flatten(rawResults, true)
         uniqResults = _.uniq(allResults)
-        returnResults = []
-        if uniqResults.length
-            returnResults = uniqResults
-        else
-            returnResults = @bookmarks
-        publish 'filtered.model', [returnResults]
-        returnResults
+        results = if uniqResults.length then uniqResults else @getBookmarks()
+        @setFiltered(results)
 
     filter: (value) ->
         if !value
             return []
         value = value.toLowerCase()
         results = []
-        _.each @bookmarks, (bookmark) ->
+        _.each @getBookmarks(), (bookmark) ->
             title = bookmark.title.toLowerCase()
             if title.indexOf(value) > -1
                 results.push(bookmark)
             _.each bookmark.tags, (tag) ->
                 if tag.toLowerCase().indexOf(value) > -1
                     results.push(bookmark)
-        @filteredBookmarks = _.uniq(results)
-        _.uniq(@filteredBookmarks)
+        _.uniq(results)
 
     processFirstBookmark: (isCtrlKey) ->
-        bookmark = _.first(@filteredBookmarks || @bookmarks)
+        bookmark = _.first(@getFiltered())
         url = bookmark.url
         publish 'first.model', [url, isCtrlKey]
         url
+
+    getBookmarks: () ->
+        @_bookmarks
+
+    getFiltered: () ->
+        @_filteredBookmarks || @_bookmarks
+
+    setBookmarks: (bookmarks) ->
+        publish 'loaded.model', [bookmarks]
+        @_bookmarks = bookmarks
+
+    setFiltered: (bookmarks) ->
+        publish 'filtered.model', [bookmarks]
+        @_filteredBookmarks = bookmarks
