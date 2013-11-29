@@ -38,11 +38,12 @@ class BookmarksModel
         @bookmarks
 
     filter: (value) ->
+        value = value.toLowerCase()
         results = []
         _.each @bookmarks, (bookmark) ->
-            if bookmark.title.indexOf(value) > -1
+            if bookmark.title.toLowerCase().indexOf(value) > -1
                 results.push(bookmark)
             _.each bookmark.tags, (tag) ->
-                if tag.indexOf(value) > -1
+                if tag.toLowerCase().indexOf(value) > -1
                     results.push(bookmark)
         results
