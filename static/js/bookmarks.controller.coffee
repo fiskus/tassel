@@ -9,6 +9,8 @@ class BookmarksController
     initInput: () ->
         input = document.querySelectorAll '.input'
         input[0].addEventListener 'keyup', _.bind(@onKey, @)
+        addLink = document.querySelectorAll '.add-bookmark'
+        addLink[0].addEventListener 'click', _.bind(@onAddClick, @)
 
     initLinks: () ->
         links = document.querySelectorAll '.bookmark-tag-link'
@@ -40,3 +42,7 @@ class BookmarksController
     pubSearches: (inputElement) ->
         searches = inputElement.value.split(' ')
         publish 'key.controller', [searches]
+
+    onAddClick: (event) ->
+        #todo add link from input
+        publish 'add.controller'
