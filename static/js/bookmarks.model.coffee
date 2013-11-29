@@ -3,36 +3,19 @@ class BookmarksModel
 
     init: () ->
         @load()
+        publish 'inited.model'
 
     load: () ->
-        @save()
+        ajaxSettings =
+            url: '/get/'
+            method: 'get'
+            context: @
+            success: @save
+        $.ajax ajaxSettings
 
-    save: () ->
-        @bookmarks = [{
-            url: 'https://ostrovok.ru',
-            title: 'ostrovok.ru',
-            tags: [
-                'travel',
-                'application',
-                'russian',
-                'job'
-            ]
-        }, {
-            url: 'http://opennet.ru',
-            title: 'opennet.ru',
-            tags: [
-                'news',
-                'linux',
-                'freebsd',
-                'openbsd'
-            ]
-        }, {
-            url: 'https://news.ycombinator.com',
-            title: 'news.ycombinator.com',
-            tags: [
-                'news'
-            ]
-        }]
+    save: (data) ->
+        @bookmarks = data.bookmarks
+        publish 'loaded.model'
 
     get: () ->
         @bookmarks

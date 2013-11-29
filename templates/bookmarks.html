@@ -5,8 +5,12 @@
     <title>Bookmarks</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bookmarks.css') }}" media="all">
     <script src="https://raw.github.com/lodash/lodash/2.4.0/dist/lodash.min.js"></script>
+    <script src="{{ url_for('static', filename='lib/zepto.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/xxspubsub.js') }}"></script>
+
     <script src="{{ url_for('static', filename='js/bookmarks.model.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bookmarks.renderer.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bookmarks.controller.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bookmarks.js') }}"></script>
 </head>
 <body>

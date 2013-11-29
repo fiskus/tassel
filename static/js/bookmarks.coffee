@@ -3,12 +3,11 @@ class Bookmarks
 
     init: () ->
         @initModel()
-        @initRenderer()
-        @input = document.querySelectorAll '.input'
-        @input[0].addEventListener 'keyup', _.bind(@onKey, @)
+        subscribe 'loaded.model', _.bind(@initRenderer, @)
+        subscribe 'inited.renderer', _.bind(@initController, @)
 
-    onKey: (event) ->
-        searches = @input[0].value.split(' ')
+    onKey: () ->
+        searches = @controller.getSearches()
         results = _.map searches, @onSearch, @
         resultsArray = []
         _.each results, (resultsPart) ->
@@ -20,6 +19,11 @@ class Bookmarks
     onSearch: (value) ->
         bookmarks = @model.get()
         @model.filter value
+
+    initController: () ->
+        @controller = new BookmarksController()
+        @controller.init()
+        subscribe 'key.controller', _.bind(@onKey, @)
 
     initRenderer: () ->
         @renderer = new BookmarksRenderer()

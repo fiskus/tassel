@@ -3,6 +3,7 @@ class BookmarksRenderer
 
     init: () ->
         @render()
+        publish 'inited.renderer'
 
     setModel: (model) ->
         @model = model
@@ -19,7 +20,7 @@ class BookmarksRenderer
                     '<% }); %>',
                 '</ul>',
             '</li>'
-        ];
+        ]
         _.template template.join(''), item
 
     render: (bookmarks) ->
