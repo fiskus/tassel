@@ -3,14 +3,15 @@ class BookmarksModel
         @load()
         subscribe 'key.controller', _.bind(@multipleFilter, @)
         subscribe 'enter.controller', _.bind(@processFirstBookmark, @)
+        subscribe 'add.controller', _.bind(@addFromInput, @)
         publish 'inited.model'
 
     load: () ->
         ajaxSettings =
-            url: '/get/'
-            method: 'get'
             context: @
+            type: 'get'
             success: @save
+            url: '/get/'
         $.ajax ajaxSettings
 
     save: (data) ->
@@ -21,7 +22,7 @@ class BookmarksModel
         rawResults = _.map values, @filter, @
         allResults = _.flatten(rawResults, true)
         uniqResults = _.uniq(allResults)
-        results = if uniqResults.length then uniqResults else @getBookmarks()
+        results = uniqResults
         @setFiltered(results)
 
     filter: (value) ->
@@ -40,6 +41,9 @@ class BookmarksModel
 
     processFirstBookmark: (isCtrlKey) ->
         bookmark = _.first(@getFiltered())
+        if !bookmark
+            @addFromInput()
+            return false
         url = bookmark.url
         publish 'first.model', [url, isCtrlKey]
         url
@@ -48,12 +52,45 @@ class BookmarksModel
         @_bookmarks
 
     getFiltered: () ->
-        @_filteredBookmarks || @_bookmarks
+        @_filteredBookmarks
 
     setBookmarks: (bookmarks) ->
         publish 'loaded.model', [bookmarks]
         @_bookmarks = bookmarks
 
-    setFiltered: (bookmarks) ->
-        publish 'filtered.model', [bookmarks]
-        @_filteredBookmarks = bookmarks
+    setFiltered: (filteredBookmarks) ->
+        publish 'filtered.model', [filteredBookmarks]
+        @_filteredBookmarks = filteredBookmarks
+
+    validate: (string) ->
+        if string.indexOf('http://') < 0
+            return false
+        string
+
+    serialize: (string) ->
+        data = string.split(',')
+        url = data[0].trim()
+        title = data[1].trim()
+        tags = _.compact data[2].split(' ')
+        serialized =
+            url: url
+            title: title
+            tags: tags
+
+    addFromInput: () ->
+        input = document.querySelectorAll '.input'
+        value = input[0].value
+        bookmarkData = @validate value
+        if !bookmarkData
+            return false
+        bookmark = @serialize bookmarkData
+        ajaxSettings =
+            context: @
+            data: bookmark
+            type: 'post'
+            success: @onPost
+            url: '/post/'
+        $.ajax ajaxSettings
+
+    onPost: (data) ->
+        console.log data

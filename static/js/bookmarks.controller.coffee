@@ -44,5 +44,4 @@ class BookmarksController
         publish 'key.controller', [searches]
 
     onAddClick: (event) ->
-        #todo add link from input
         publish 'add.controller'
