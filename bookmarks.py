@@ -42,12 +42,3 @@ def getBookmarks():
 if __name__ == '__main__':
     app.debug = True
     app.run()
-
-
-
-
-
-
-
-new_content = content + bookmark
-file.write(new_content)
