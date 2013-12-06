@@ -40,8 +40,8 @@ class BookmarksController
         @pubSearches(input[0])
 
     pubSearches: (inputElement) ->
-        searches = inputElement.value.split(' ')
-        publish 'key.controller', [searches]
+        search = inputElement.value
+        publish 'key.controller', [search]
 
     onAddClick: (event) ->
         publish 'add.controller'

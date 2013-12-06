@@ -1,7 +1,7 @@
 class BookmarksModel
     constructor: () ->
         @load()
-        subscribe 'key.controller', _.bind(@multipleFilter, @)
+        subscribe 'key.controller', _.bind(@onInput, @)
         subscribe 'enter.controller', _.bind(@processFirstBookmark, @)
         subscribe 'add.controller', _.bind(@addFromInput, @)
         publish 'inited.model'
@@ -18,7 +18,16 @@ class BookmarksModel
         bookmarks = data.bookmarks
         @setBookmarks(bookmarks)
 
-    multipleFilter: (values) ->
+    onInput: (searchString) ->
+        if searchString == ''
+            publish 'filtered.model', [@getBookmarks()]
+        else if @isUrl(searchString)
+            publish 'filtered.model', []
+        else
+            values = searchString.split(' ')
+            @search values
+
+    search: (values) ->
         rawResults = _.map values, @filter, @
         allResults = _.flatten(rawResults, true)
         uniqResults = _.uniq(allResults)
@@ -58,14 +67,19 @@ class BookmarksModel
         publish 'loaded.model', [bookmarks]
         @_bookmarks = bookmarks
 
+    isUrl: (string) ->
+        string.indexOf('http://') == 0
+
     setFiltered: (filteredBookmarks) ->
         publish 'filtered.model', [filteredBookmarks]
         @_filteredBookmarks = filteredBookmarks
 
     validate: (string) ->
-        if string.indexOf('http://') < 0
-            return false
-        string
+        if @isUrl(string)
+            output = string
+        else
+            output = false
+        return output
 
     serialize: (string) ->
         data = string.split(',')
