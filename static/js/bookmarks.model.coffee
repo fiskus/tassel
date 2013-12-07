@@ -72,30 +72,33 @@ class BookmarksModel
         publish 'filtered.model', [filteredBookmarks]
         @_filteredBookmarks = filteredBookmarks
 
-    validate: (string) ->
-        if string.indexOf('http://') == 0
-            output = string
-        else
-            output = false
-        output
+    validate: (data) ->
+        isValid = true
+        if data.url.indexOf('http://') != 0
+            isValid = false
+        if !data.title
+            isValid = false
+        if !data.tags || !data.tags.length
+            isValid = false
+        if isValid then data else false
 
-    serialize: (string) ->
-        data = string.split(',')
-        url = data[0].trim()
-        title = data[1].trim()
-        tags = _.compact data[2].split(' ')
-        serialized =
-            url: url
-            title: title
-            tags: tags
+    serialize: (form) ->
+        serialized = {}
+        _.each form, (element) ->
+            name = element.name
+            value = element.value
+            if value
+                if name == 'tags'
+                    serialized[name] = value.split(' ')
+                else
+                    serialized[name] = value
+        serialized
 
-    addFromInput: () ->
-        input = document.querySelectorAll '.input'
-        value = input[0].value
-        bookmarkData = @validate value
-        if !bookmarkData
+    addFromInput: (event) ->
+        bookmark = @serialize event.currentTarget
+        bookmark = @validate bookmark
+        if !bookmark
             return false
-        bookmark = @serialize bookmarkData
         ajaxSettings =
             context: @
             data: bookmark
