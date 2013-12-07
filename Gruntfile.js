@@ -31,7 +31,10 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'static/css/bookmarks.css': 'static/sass/bookmarks.sass'
-                }
+                },
+                flags: [
+                    '--minify'
+                ]
             }
         }
     });
