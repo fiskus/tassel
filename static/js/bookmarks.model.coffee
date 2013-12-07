@@ -16,7 +16,7 @@ class BookmarksModel
         $.ajax ajaxSettings
 
     save: (data) ->
-        bookmarks = data.bookmarks
+        bookmarks = data.bookmarks.reverse()
         @setBookmarks(bookmarks)
 
     onEmptyInput: (search) ->
