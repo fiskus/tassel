@@ -2,15 +2,17 @@ class BookmarksRenderer
     constructor: () ->
         subscribe 'loaded.model', _.bind(@render, @)
         subscribe 'filtered.model', _.bind(@render, @)
-        subscribe 'url.controller', _.bind(@onUri, @)
+        subscribe 'url.controller', _.bind(@showMeta, @)
+        subscribe 'empty.controller', _.bind(@hideMeta, @)
         publish 'inited.renderer'
-
-    onUri: () ->
-        @showMeta()
 
     showMeta: () ->
         metaBox = document.querySelectorAll('.bookmark-meta')
         metaBox[0].style.display = 'block'
+
+    hideMeta: () ->
+        metaBox = document.querySelectorAll('.bookmark-meta')
+        metaBox[0].style.display = 'none'
 
     getItemHtml: (item) ->
         template = [
