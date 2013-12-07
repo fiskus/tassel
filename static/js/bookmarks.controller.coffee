@@ -36,7 +36,7 @@ class BookmarksController
         link = event.currentTarget
         tag = link.textContent
         input = document.querySelectorAll '.input'
-        input[0].value = tag
+        input[0].value = '#' + tag
         @pubSearches(input[0])
 
     pubSearches: (inputElement) ->
