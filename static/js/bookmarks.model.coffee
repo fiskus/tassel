@@ -42,9 +42,11 @@ class BookmarksModel
             title = bookmark.title.toLowerCase()
             if title.indexOf(value) > -1
                 results.push(bookmark)
-            _.each bookmark.tags, (tag) ->
-                if tag.toLowerCase().indexOf(value) > -1
-                    results.push(bookmark)
+            if value.indexOf('#') == 0
+                tagSearch = value.substring 1
+                _.each bookmark.tags, (tag) ->
+                    if tag.toLowerCase().indexOf(tagSearch) > -1
+                        results.push(bookmark)
         _.uniq(results)
 
     processFirstBookmark: (isCtrlKey) ->
