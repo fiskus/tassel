@@ -1,4 +1,6 @@
 *.swp
 *.css
 *.sassc
-*.js
+static/js/*.js
+static/lib/*.js
+node_modules
