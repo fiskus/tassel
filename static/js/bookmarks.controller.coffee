@@ -11,6 +11,8 @@ class BookmarksController
         input[0].addEventListener 'keyup', _.bind(@onKey, @)
         addLink = document.querySelectorAll '.add-bookmark'
         addLink[0].addEventListener 'click', _.bind(@onAddClick, @)
+        clearLink = document.querySelectorAll '.clear-search'
+        clearLink[0].addEventListener 'click', _.bind(@onClearClick, @)
 
     initLinks: () ->
         links = document.querySelectorAll '.bookmark-tag-link'
@@ -50,3 +52,9 @@ class BookmarksController
 
     onAddClick: (event) ->
         publish 'add.controller'
+
+    onClearClick: (event) ->
+        input = document.querySelectorAll '.input'
+        input[0].value = ''
+        publish 'clear.controller'
+        publish 'empty.controller'
