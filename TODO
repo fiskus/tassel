@@ -1,1 +1,3 @@
 Use localStorage and make it usable offline.
+Use sqlite on backend.
+Make live reload grunt server.
