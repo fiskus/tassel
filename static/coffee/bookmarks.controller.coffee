@@ -3,6 +3,7 @@ class BookmarksController
         @initInput()
         subscribe 'rendered.renderer', _.bind(@initLinks, @)
         subscribe 'first.model', _.bind(@onEnter, @)
+        subscribe 'posted.model', _.bind(@clearInput, @)
         subscribe 'tagclick.controller', _.bind(@pubSearches, @)
         publish 'inited.controller'
 
@@ -12,7 +13,7 @@ class BookmarksController
         form = document.querySelectorAll '.form'
         form[0].addEventListener 'submit', _.bind(@onSubmit, @)
         clearLink = document.querySelectorAll '.clear-search'
-        clearLink[0].addEventListener 'click', _.bind(@onClearClick, @)
+        clearLink[0].addEventListener 'click', _.bind(@clearInput, @)
 
     initLinks: () ->
         links = document.querySelectorAll '.bookmark-tag-link'
@@ -54,8 +55,11 @@ class BookmarksController
         event.preventDefault()
         publish 'add.controller', [event]
 
-    onClearClick: (event) ->
-        input = document.querySelectorAll '.input'
-        input[0].value = ''
-        publish 'clear.controller'
+    clearInput: () ->
+        inputUrl = document.querySelectorAll('.input')[0]
+        inputTitle = document.querySelectorAll('.bookmark-meta-title')[0]
+        inputTags = document.querySelectorAll('.bookmark-meta-tags')[0]
+        inputUrl.value = ''
+        inputTitle.value = ''
+        inputTags.value = ''
         publish 'empty.controller'

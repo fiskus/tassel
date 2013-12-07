@@ -17,6 +17,7 @@ class BookmarksModel
     save: (data) ->
         bookmarks = data.bookmarks.reverse()
         @setBookmarks(bookmarks)
+        publish 'loaded.model', [bookmarks]
 
     onEmptyInput: (search) ->
         publish 'filtered.model', [@getBookmarks()]
@@ -64,7 +65,6 @@ class BookmarksModel
         @_filteredBookmarks
 
     setBookmarks: (bookmarks) ->
-        publish 'loaded.model', [bookmarks]
         @_bookmarks = bookmarks
 
     setFiltered: (filteredBookmarks) ->
@@ -100,9 +100,14 @@ class BookmarksModel
             return false
         url = '/post/'
         data = bookmark
+        options =
+            cache: true
         onSuccess = _.bind(@onPost, @)
-        qwest.post(url, data).success(onSuccess)
+        qwest.post(url, data, options).success(onSuccess)
 
     onPost: (data) ->
+        #TODO: push at first position
+        @_bookmarks.push data.bookmark
         if console and console.log
             console.log data
+        publish 'posted.model'

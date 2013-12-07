@@ -31,7 +31,12 @@ def post():
     content = cache + bookmark + '\n'
     file.write(content)
     file.close()
-    return jsonify(dict(bookmark=bookmark))
+    bookmarkJson = dict(
+        url = url,
+        title = title,
+        tags = request.form.getlist('tags[]')
+    )
+    return jsonify(dict(bookmark=bookmarkJson))
 
 def getBookmarks():
     file = open('bookmarks.db', 'r')
