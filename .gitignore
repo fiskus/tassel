@@ -1,6 +1,12 @@
 *.swp
-*.css
-*.sassc
-static/js/*.js
-static/lib/*.js
+.sass-cache
+static/css/bookmarks.css
+static/js/bookmarks.js
+static/js/bookmarks.min.js
+static/lib/lodash.js
+static/lib/lodash.min.js
 node_modules
+
+static/lib/json.js
+static/lib/store.js
+static/lib/zepto.js
