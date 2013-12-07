@@ -4,6 +4,8 @@ class BookmarksRenderer
         subscribe 'filtered.model', _.bind(@render, @)
         subscribe 'url.controller', _.bind(@showMeta, @)
         subscribe 'empty.controller', _.bind(@hideMeta, @)
+        subscribe 'key.controller', _.bind(@showClearLink, @)
+        subscribe 'empty.controller', _.bind(@hideClearLink, @)
         publish 'inited.renderer'
 
     showMeta: () ->
@@ -14,6 +16,14 @@ class BookmarksRenderer
         metaBox = document.querySelectorAll('.bookmark-meta')
         metaBox[0].style.display = 'none'
 
+    showClearLink: () ->
+        clearLink = document.querySelectorAll('.clear-search')
+        clearLink[0].style.display = 'block'
+
+    hideClearLink: () ->
+        clearLink = document.querySelectorAll('.clear-search')
+        clearLink[0].style.display = 'none'
+
     getItemHtml: (item) ->
         template = [
             '<li class="bookmark-item">',
@@ -21,7 +31,9 @@ class BookmarksRenderer
                 '<ul class="bookmark-tags">',
                     '<% _.each(tags, function(tag) { %>',
                         '<li class="bookmark-tag-item">',
-                            '<a class="bookmark-tag-link" href="#<%= tag %>"><%= tag %></a>',
+                            '<a class="bookmark-tag-link" href="#<%= tag %>">',
+                                '<%= tag %>',
+                            '</a>',
                         '</li>',
                     '<% }); %>',
                 '</ul>',
