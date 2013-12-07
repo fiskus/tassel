@@ -9,4 +9,3 @@ node_modules
 
 static/lib/json.js
 static/lib/store.js
-static/lib/zepto.js

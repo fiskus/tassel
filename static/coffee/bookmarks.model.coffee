@@ -8,12 +8,11 @@ class BookmarksModel
         publish 'inited.model'
 
     load: () ->
-        ajaxSettings =
-            context: @
-            type: 'get'
-            success: @save
-            url: '/get/'
-        $.ajax ajaxSettings
+        url = '/get/'
+        options =
+            cache: true
+        onSuccess = _.bind(@save, @)
+        qwest.get(url, {}, options).success(onSuccess)
 
     save: (data) ->
         bookmarks = data.bookmarks.reverse()
@@ -99,13 +98,10 @@ class BookmarksModel
         bookmark = @validate bookmark
         if !bookmark
             return false
-        ajaxSettings =
-            context: @
-            data: bookmark
-            type: 'post'
-            success: @onPost
-            url: '/post/'
-        $.ajax ajaxSettings
+        url = '/post/'
+        data = bookmark
+        onSuccess = _.bind(@onPost, @)
+        qwest.post(url, data).success(onSuccess)
 
     onPost: (data) ->
         if console and console.log
