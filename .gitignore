@@ -3,6 +3,7 @@
 static/css/bookmarks.css
 static/js/bookmarks.js
 static/js/bookmarks.min.js
+static/js/bookmarks-libs.min.js
 static/lib/lodash.js
 static/lib/lodash.min.js
 node_modules

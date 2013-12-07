@@ -11,9 +11,15 @@ module.exports = function(grunt) {
             }
         },
         uglify: {
-            build: {
-                src: 'static/js/<%= pkg.name %>.js',
-                dest: 'static/js/<%= pkg.name %>.min.js'
+            bookmarks: {
+                files: {
+                    'static/js/<%= pkg.name %>.min.js': ['static/js/<%= pkg.name %>.js']
+                }
+            },
+            libs: {
+                files: {
+                    'static/js/<%= pkg.name %>-libs.min.js': ['static/lib/lodash.min.js', 'static/lib/qwest.js']
+                }
             }
         },
         lodash: {
@@ -30,7 +36,7 @@ module.exports = function(grunt) {
                     style: 'compressed'
                 },
                 files: {
-                    'static/css/bookmarks.css': 'static/sass/bookmarks.sass'
+                    'static/css/<%= pkg.name %>.css': 'static/sass/<%= pkg.name %>.sass'
                 },
                 flags: [
                     '--minify'
