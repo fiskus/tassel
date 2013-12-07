@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Bookmarks</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bookmarks.css') }}" media="all">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bookmarks.css') }}">
     <script src="{{ url_for('static', filename='lib/lodash.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/zepto.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/xxspubsub.js') }}"></script>
-
-    <script src="{{ url_for('static', filename='js/bookmarks.model.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bookmarks.renderer.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bookmarks.controller.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bookmarks.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/json.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/store.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bookmarks.min.js') }}"></script>
 </head>
 <body>
     <div class="wrapper">
@@ -22,7 +19,7 @@
                     type="text"
                     placeholder="Search bookmarks"
                     tabindex="1"
-                    autofocus/>
+                    autofocus="true">
                 <button class="clear-search">⊗</button>
                 <button type="submit" tabindex="4" class="add-bookmark">+</button>
             </div>
