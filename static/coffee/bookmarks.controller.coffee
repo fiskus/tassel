@@ -46,7 +46,7 @@ class BookmarksController
         search = inputElement.value
         if !search
             publish 'empty.controller'
-        else if search.indexOf('http://') == 0
+        else if search.indexOf('http://') == 0 or search.indexOf('https://') == 0
             publish 'url.controller'
         else
             publish 'key.controller', [search]

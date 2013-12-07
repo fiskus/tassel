@@ -73,7 +73,7 @@ class BookmarksModel
 
     validate: (data) ->
         isValid = true
-        if data.url.indexOf('http://') != 0
+        if !(data.url.indexOf('http://') == 0 or data.url.indexOf('https://') == 0)
             isValid = false
         if !data.title
             isValid = false
@@ -107,6 +107,7 @@ class BookmarksModel
 
     onPost: (data) ->
         #TODO: push at first position
+        #FIXME: tags posting
         @_bookmarks.push data.bookmark
         if console and console.log
             console.log data
