@@ -108,4 +108,5 @@ class BookmarksModel
         $.ajax ajaxSettings
 
     onPost: (data) ->
-        console.log data
+        if console and console.log
+            console.log data
