@@ -110,11 +110,10 @@ class BookmarksModel
         if !bookmark
             return false
         url = '/post/'
-        data = bookmark
         options =
             cache: true
         onSuccess = _.bind(@onPost, @)
-        qwest.post(url, data, options).success(onSuccess)
+        qwest.post(url, bookmark, options).success(onSuccess)
 
     onPost: (data) ->
         #TODO: push at first position
@@ -129,8 +128,11 @@ class BookmarksModel
         bookmark = @validate bookmark
         if !bookmark
             return false
-        @onPostEdit bookmark
+        url = '/edit/'
+        options =
+            cache: true
+        onSuccess = _.bind(@onPostEdit, @)
+        qwest.post(url, bookmark, options).success(onSuccess)
 
     onPostEdit: (data) ->
-        #publish 'edit.model', [data.bookmark]
-        publish 'edit.model', [data]
+        publish 'edit.model', [data.bookmark]

@@ -8,3 +8,4 @@ node_modules
 
 static/lib/json.js
 static/lib/store.js
+*.sqlite

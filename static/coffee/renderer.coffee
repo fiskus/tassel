@@ -28,7 +28,7 @@ class BookmarksRenderer
         clearLink[0].style.display = 'none'
 
     edit: (bookmark) ->
-        url = bookmark.querySelectorAll('.bookmark-link')[0].href
+        url = bookmark.querySelectorAll('.bookmark-link')[0].getAttribute('href')
         title = bookmark.querySelectorAll('.bookmark-link')[0].innerHTML
         tags = _.map bookmark.querySelectorAll('.bookmark-tag-link'), (tag) ->
             tag.innerHTML
@@ -41,14 +41,14 @@ class BookmarksRenderer
         publish 'form.renderer', [bookmark]
 
     remove: (bookmark) ->
-        url = bookmark.querySelectorAll('.bookmark-link')[0].href
+        url = bookmark.querySelectorAll('.bookmark-link')[0].getAttribute('href')
         bookmark.remove()
         publish 'remove.renderer', [url]
 
     getFormHtml: (data) ->
         template = [
             '<form class="bookmark-form">',
-                '<input name="url" class="bookmark-link-edit" value="<%= url %>" autofocus="true" tabindex="5">',
+                '<input name="url" class="bookmark-link-edit" value="<%= url %>" autofocus="true" tabindex="5" disabled="disabled">',
                 '<input name="title" class="bookmark-title-edit" value="<%= title %>" tabindex="6">',
                 '<input name="tags" class="bookmark-tags-edit" value="<%= tags.join(\' \') %>" tabindex="7">',
                 '<button class="bookmark-form-submit" type="submit" tabindex="8">✓</button>',
