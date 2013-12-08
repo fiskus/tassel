@@ -25,7 +25,7 @@ def get():
 def post():
     url = request.form['url']
     title = request.form['title']
-    tags = ' '.join(request.form.getlist('tags[]'))
+    tags = getTagsString(request.form.getlist('tags[]'))
     bookmark = dict(
         url = url,
         title = title,
@@ -43,7 +43,7 @@ def edit():
     if not result:
         url = request.form['url'] + '/'
     title = request.form['title']
-    tags = ' '.join(request.form.getlist('tags[]'))
+    tags = getTagsString(request.form.getlist('tags[]'))
     bookmark = dict(
         url = url,
         title = title,
@@ -60,6 +60,13 @@ def getBookmarkJson(url, title, tags):
         tags = tags.split(' ')
     )
     return bookmarkJson
+
+def getTagsString(rowTags):
+    if rowTags[0].find(',') > 0:
+        tags = rowTags[0].split(',')
+    else:
+        tags = rawTags
+    return ' '.join(tags)
 
 if __name__ == '__main__':
     app.debug = True
