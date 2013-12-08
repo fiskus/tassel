@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, request
 import dataset
 
 app = Flask(__name__)
+app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 
 db = dataset.connect('sqlite:///bookmarks.sqlite')
 table = db['bookmarks']
@@ -9,7 +10,7 @@ table = db['bookmarks']
 
 @app.route('/')
 def index():
-    return render_template('bookmarks.html')
+    return render_template('bookmarks.jade')
 
 
 @app.route('/get/', methods=['GET'])

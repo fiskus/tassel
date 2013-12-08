@@ -1,0 +1,22 @@
+doctype 5
+html
+    head
+        meta(charset='UTF-8')
+        title Bookmarks
+        link(rel='stylesheet', href=url_for('static', filename='css/bookmarks.css'))
+        script(src=url_for('static', filename='js/bookmarks-libs.min.js'))
+        script(src=url_for('static', filename='js/bookmarks.min.js'))
+    body
+        .wrapper
+            form.form
+                .input-wrapper
+                    input.input(type='text', name='url', placeholder='Search bookmarks', tabindex='1', autofocus)
+                    button.clear-search ⊗
+                    button.add-bookmark(type='submit', tabindex='4') +
+                .bookmark-meta
+                    input.bookmark-meta-title(type='text', name='title', placeholder='Title', tabindex='2')
+                    input.bookmark-meta-tags(type='text', name='tags', placeholder='Tags', tabindex='3')
+            .bookmarks-list-wrapper
+                ul.bookmarks-list
+        script
+            var bookmarks = new Bookmarks()
