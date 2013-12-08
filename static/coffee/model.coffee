@@ -25,6 +25,10 @@ class BookmarksModel
         bookmarks = _.clone @getBookmarks()
         index = _.findIndex bookmarks, (bookmark) ->
             bookmark.url == url
+        url = '/delete/'
+        options =
+            cache: true
+        qwest.post(url, bookmarks[index], options)
         delete bookmarks[index]
         bookmarks = _.compact bookmarks
         @setBookmarks bookmarks
@@ -117,8 +121,6 @@ class BookmarksModel
     onPost: (data) ->
         #TODO: push at first position
         @_bookmarks.push data.bookmark
-        if console and console.log
-            console.log data
         publish 'posted.model', [data.bookmark]
 
     edit: (event) ->

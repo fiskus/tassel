@@ -21,6 +21,7 @@ def get():
         bookmarks.append(bookmarkJson)
     return jsonify(dict(bookmarks = bookmarks))
 
+#Rename to add
 @app.route('/post/', methods=['POST'])
 def post():
     url = request.form['url']
@@ -38,7 +39,6 @@ def post():
 @app.route('/edit/', methods=['POST'])
 def edit():
     url = request.form['url']
-    result = table.find_one(url = url)
     title = request.form['title']
     tags = getTagsString(request.form.getlist('tags[]'))
     bookmark = dict(
@@ -48,7 +48,13 @@ def edit():
     )
     response = table.update(bookmark, ['url'])
     bookmarkJson = getBookmarkJson(url, title, tags)
-    return jsonify(dict(bookmark = bookmarkJson, result=result, url=url))
+    return jsonify(dict(bookmark = bookmarkJson))
+
+@app.route('/delete/', methods=['POST'])
+def delete():
+    url = request.form['url']
+    table.delete(url = url)
+    return jsonify(dict(status = 'success'))
 
 def getBookmarkJson(url, title, tags):
     bookmarkJson = dict(
