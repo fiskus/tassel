@@ -37,6 +37,10 @@ class BookmarksRenderer
                         '</li>',
                     '<% }); %>',
                 '</ul>',
+                '<span class="bookmark-control">'
+                    '<button class="bookmark-edit">✎</button>',
+                    '<button class="bookmark-remove">⊗</button>',
+                '</span>'
             '</li>'
         ]
         _.template template.join(''), item

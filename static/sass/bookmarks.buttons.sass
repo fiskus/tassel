@@ -1,19 +1,30 @@
 @import 'bookmarks.mixins.sass'
 
 .add-bookmark,
+.clear-search,
+.bookmark-edit,
+.bookmark-remove
+  cursor: pointer
+  border: none
+
+.add-bookmark,
+.bookmark-edit,
+.bookmark-remove
+  background: #e5e5e6
+
+  &:hover
+    background: #d5d5d6
+
+.add-bookmark,
 .clear-search
   font: bold 20px/24px $font-mono
   padding: 5px 10px
   position: absolute
+
+.add-bookmark
   color: #900
-  background: #e5e5e6
   right: -50px
   top: 0
-  cursor: pointer
-  border: none
-
-  &:hover
-    background: #d5d5d6
 
 .clear-search
   top: 1px
@@ -25,3 +36,14 @@
   &:hover
     background: transparent
     color: #333
+
+.bookmark-edit,
+.bookmark-remove
+  font: 22px/18px $font-mono
+  color: #999
+
+  &:hover
+    color: #333
+
+.bookmark-edit
+  margin: 0 0 4px
