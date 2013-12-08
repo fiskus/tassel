@@ -18,16 +18,8 @@ module.exports = function(grunt) {
             },
             libs: {
                 files: {
-                    'static/js/<%= pkg.name %>-libs.min.js': ['static/lib/lodash.min.js', 'static/lib/qwest.js']
+                    'static/js/<%= pkg.name %>-libs.min.js': ['static/lib/lodash.js', 'static/lib/qwest.js']
                 }
-            }
-        },
-        lodash: {
-            options: {
-                modifier: 'modern'
-            },
-            build: {
-                dest: 'static/lib/lodash.js'
             }
         },
         sass: {
@@ -45,10 +37,9 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-lodash');
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-sass');
 
-    grunt.registerTask('default', ['lodash', 'coffee', 'uglify', 'sass']);
+    grunt.registerTask('default', ['coffee', 'uglify', 'sass']);
 };
