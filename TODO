@@ -1,5 +1,0 @@
-Use localStorage and make it usable offline.
-Use sqlite on backend.
-Make live reload grunt server.
-Edit and remove bookmark.
-Isolate edit form and add form classes.
