@@ -1,6 +1,7 @@
 @import 'mixins.sass'
 
 .add-bookmark,
+.bookmark-form-submit,
 .clear-search,
 .bookmark-edit,
 .bookmark-remove
@@ -8,6 +9,7 @@
   border: none
 
 .add-bookmark,
+.bookmark-form-submit,
 .bookmark-edit,
 .bookmark-remove
   background: #e5e5e6
@@ -16,15 +18,20 @@
     background: #d5d5d6
 
 .add-bookmark,
+.bookmark-form-submit,
 .clear-search
   font: bold 20px/24px $font-mono
   padding: 5px 10px
   position: absolute
 
-.add-bookmark
+.add-bookmark,
+.bookmark-form-submit,
   color: #900
   right: -50px
   top: 0
+
+.bookmark-form-submit
+  top: 4px
 
 .clear-search
   top: 1px

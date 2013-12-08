@@ -5,6 +5,7 @@ class BookmarksController
         subscribe 'first.model', _.bind(@onEnter, @)
         subscribe 'posted.model', _.bind(@clearInput, @)
         subscribe 'tagclick.controller', _.bind(@pubSearches, @)
+        subscribe 'form.renderer', _.bind(@onFormRender, @)
         publish 'inited.controller'
 
     initInput: () ->
@@ -77,7 +78,7 @@ class BookmarksController
         else
             publish 'key.controller', [search]
 
-    onSubmit: (event, data) ->
+    onSubmit: (event) ->
         event.preventDefault()
         publish 'add.controller', [event]
 
@@ -89,3 +90,11 @@ class BookmarksController
         inputTitle.value = ''
         inputTags.value = ''
         publish 'empty.controller'
+
+    onFormRender: (wrapper) ->
+        form = wrapper.querySelectorAll('.bookmark-form')
+        form[0].addEventListener 'submit', _.bind(@onEditSubmit, @)
+
+    onEditSubmit: (event) ->
+        event.preventDefault()
+        publish 'editsubmit.controller', [event]

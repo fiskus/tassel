@@ -5,6 +5,7 @@ class BookmarksModel
         subscribe 'empty.controller', _.bind(@onEmptyInput, @)
         subscribe 'enter.controller', _.bind(@processFirstBookmark, @)
         subscribe 'add.controller', _.bind(@addFromInput, @)
+        subscribe 'editsubmit.controller', _.bind(@edit, @)
         subscribe 'remove.renderer', _.bind(@remove, @)
         publish 'inited.model'
 
@@ -24,7 +25,7 @@ class BookmarksModel
         bookmarks = _.clone @getBookmarks()
         index = _.findIndex bookmarks, (bookmark) ->
             #TODO: compare without trailing slash
-            return bookmark.url == url or bookmark.url + '/' == url
+            bookmark.url == url or bookmark.url + '/' == url
         delete bookmarks[index]
         bookmarks = _.compact bookmarks
         @setBookmarks bookmarks
@@ -121,4 +122,15 @@ class BookmarksModel
         @_bookmarks.push data.bookmark
         if console and console.log
             console.log data
-        publish 'posted.model'
+        publish 'posted.model', [data.bookmark]
+
+    edit: (event) ->
+        bookmark = @serialize event.currentTarget
+        bookmark = @validate bookmark
+        if !bookmark
+            return false
+        @onPostEdit bookmark
+
+    onPostEdit: (data) ->
+        #publish 'edit.model', [data.bookmark]
+        publish 'edit.model', [data]
