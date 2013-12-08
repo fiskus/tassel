@@ -26,7 +26,7 @@ def get():
 def add():
     bookmark = getBookmarkFromRequest(request)
     table.insert(bookmark)
-    bookmarkJson = getBookmarkJson(url, title, tags)
+    bookmarkJson = getBookmarkJson(bookmark['url'], bookmark['title'], bookmark['tags'])
     return jsonify(dict(bookmark = bookmarkJson))
 
 
@@ -34,7 +34,7 @@ def add():
 def edit():
     bookmark = getBookmarkFromRequest(request)
     response = table.update(bookmark, ['url'])
-    bookmarkJson = getBookmarkJson(url, title, tags)
+    bookmarkJson = getBookmarkJson(bookmark['url'], bookmark['title'], bookmark['tags'])
     return jsonify(dict(bookmark = bookmarkJson))
 
 
@@ -54,6 +54,7 @@ def getBookmarkFromRequest(request):
         title = title,
         tags = tags
     )
+    return bookmark
 
 
 def getBookmarkJson(url, title, tags):
