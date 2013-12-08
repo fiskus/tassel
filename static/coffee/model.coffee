@@ -24,8 +24,7 @@ class BookmarksModel
     remove: (url) ->
         bookmarks = _.clone @getBookmarks()
         index = _.findIndex bookmarks, (bookmark) ->
-            #TODO: compare without trailing slash
-            bookmark.url == url or bookmark.url + '/' == url
+            bookmark.url == url
         delete bookmarks[index]
         bookmarks = _.compact bookmarks
         @setBookmarks bookmarks
@@ -117,7 +116,6 @@ class BookmarksModel
 
     onPost: (data) ->
         #TODO: push at first position
-        #FIXME: tags posting
         @_bookmarks.push data.bookmark
         if console and console.log
             console.log data

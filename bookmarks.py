@@ -39,9 +39,6 @@ def post():
 def edit():
     url = request.form['url']
     result = table.find_one(url = url)
-    #FIXME: trailing slash
-    if not result:
-        url = request.form['url'] + '/'
     title = request.form['title']
     tags = getTagsString(request.form.getlist('tags[]'))
     bookmark = dict(
