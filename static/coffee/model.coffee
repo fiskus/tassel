@@ -5,6 +5,7 @@ class BookmarksModel
         subscribe 'empty.controller', _.bind(@onEmptyInput, @)
         subscribe 'enter.controller', _.bind(@processFirstBookmark, @)
         subscribe 'add.controller', _.bind(@addFromInput, @)
+        subscribe 'remove.renderer', _.bind(@remove, @)
         publish 'inited.model'
 
     load: () ->
@@ -16,8 +17,17 @@ class BookmarksModel
 
     save: (data) ->
         bookmarks = data.bookmarks.reverse()
-        @setBookmarks(bookmarks)
+        @setBookmarks bookmarks
         publish 'loaded.model', [bookmarks]
+
+    remove: (url) ->
+        bookmarks = _.clone @getBookmarks()
+        index = _.findIndex bookmarks, (bookmark) ->
+            #TODO: compare without trailing slash
+            return bookmark.url == url or bookmark.url + '/' == url
+        delete bookmarks[index]
+        bookmarks = _.compact bookmarks
+        @setBookmarks bookmarks
 
     onEmptyInput: (search) ->
         publish 'filtered.model', [@getBookmarks()]

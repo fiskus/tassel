@@ -1,7 +1,7 @@
 class BookmarksController
     constructor: () ->
         @initInput()
-        subscribe 'rendered.renderer', _.bind(@initLinks, @)
+        subscribe 'rendered.renderer', _.bind(@initBookmarks, @)
         subscribe 'first.model', _.bind(@onEnter, @)
         subscribe 'posted.model', _.bind(@clearInput, @)
         subscribe 'tagclick.controller', _.bind(@pubSearches, @)
@@ -15,11 +15,37 @@ class BookmarksController
         clearLink = document.querySelectorAll '.clear-search'
         clearLink[0].addEventListener 'click', _.bind(@clearInput, @)
 
-    initLinks: () ->
-        links = document.querySelectorAll '.bookmark-tag-link'
+    initBookmarks: () ->
+        bookmarks = document.querySelectorAll '.bookmark-item'
+        _.each bookmarks, _.bind(@initBookmark, @)
+        bookmarks
+
+    initBookmark: (bookmark) ->
+        @initTags(bookmark)
+        @initButtons(bookmark)
+        bookmark
+
+    initButtons: (bookmark) ->
+        editBtn = bookmark.querySelectorAll '.bookmark-edit'
+        removeBtn = bookmark.querySelectorAll '.bookmark-remove'
+        onEdit = (event) ->
+            @edit bookmark
+        editBtn[0].addEventListener 'click', _.bind(onEdit, @)
+        onRemove = (event) ->
+            @remove bookmark
+        removeBtn[0].addEventListener 'click', _.bind(onRemove, @)
+
+    initTags: (bookmark) ->
+        links = bookmark.querySelectorAll '.bookmark-tag-link'
         listenLink = (link) ->
             link.addEventListener 'click', _.bind(@onTagClick, @)
         _.each links, listenLink, @
+
+    edit: (bookmark) ->
+        publish 'edit.controller', [bookmark]
+
+    remove: (bookmark) ->
+        publish 'remove.controller', [bookmark]
 
     onKey: (event) ->
         keyCode = event.which

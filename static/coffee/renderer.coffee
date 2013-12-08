@@ -6,6 +6,8 @@ class BookmarksRenderer
         subscribe 'empty.controller', _.bind(@hideMeta, @)
         subscribe 'key.controller', _.bind(@showClearLink, @)
         subscribe 'empty.controller', _.bind(@hideClearLink, @)
+        subscribe 'edit.controller', _.bind(@edit, @)
+        subscribe 'remove.controller', _.bind(@remove, @)
         publish 'inited.renderer'
 
     showMeta: () ->
@@ -23,6 +25,14 @@ class BookmarksRenderer
     hideClearLink: () ->
         clearLink = document.querySelectorAll('.clear-search')
         clearLink[0].style.display = 'none'
+
+    edit: (bookmark) ->
+        console.log bookmark
+
+    remove: (bookmark) ->
+        url = bookmark.querySelectorAll('.bookmark-link')[0].href
+        bookmark.remove()
+        publish 'remove.renderer', [url]
 
     getItemHtml: (item) ->
         template = [
