@@ -10,7 +10,7 @@ table = db['bookmarks']
 def index():
     return render_template('bookmarks.html')
 
-@app.route('/get/')
+@app.route('/get/', methods=['GET'])
 def get():
     bookmarks = []
     for row in table.all():
@@ -18,9 +18,8 @@ def get():
         bookmarks.append(bookmarkJson)
     return jsonify(dict(bookmarks = bookmarks))
 
-#Rename to add
-@app.route('/post/', methods=['POST'])
-def post():
+@app.route('/add/', methods=['POST'])
+def add():
     bookmark = getBookmarkFromRequest(request)
     table.insert(bookmark)
     bookmarkJson = getBookmarkJson(url, title, tags)

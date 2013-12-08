@@ -112,7 +112,7 @@ class BookmarksModel
         bookmark = @validate bookmark
         if !bookmark
             return false
-        url = '/post/'
+        url = '/add/'
         options =
             cache: true
         onSuccess = _.bind(@onPost, @)
