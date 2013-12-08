@@ -6,9 +6,11 @@ app = Flask(__name__)
 db = dataset.connect('sqlite:///bookmarks.sqlite')
 table = db['bookmarks']
 
+
 @app.route('/')
 def index():
     return render_template('bookmarks.html')
+
 
 @app.route('/get/', methods=['GET'])
 def get():
@@ -18,12 +20,14 @@ def get():
         bookmarks.append(bookmarkJson)
     return jsonify(dict(bookmarks = bookmarks))
 
+
 @app.route('/add/', methods=['POST'])
 def add():
     bookmark = getBookmarkFromRequest(request)
     table.insert(bookmark)
     bookmarkJson = getBookmarkJson(url, title, tags)
     return jsonify(dict(bookmark = bookmarkJson))
+
 
 @app.route('/edit/', methods=['POST'])
 def edit():
@@ -32,11 +36,13 @@ def edit():
     bookmarkJson = getBookmarkJson(url, title, tags)
     return jsonify(dict(bookmark = bookmarkJson))
 
+
 @app.route('/delete/', methods=['POST'])
 def delete():
     url = request.form['url']
     table.delete(url = url)
     return jsonify(dict(status = 'success'))
+
 
 def getBookmarkFromRequest(request):
     url = request.form['url']
@@ -48,6 +54,7 @@ def getBookmarkFromRequest(request):
         tags = tags
     )
 
+
 def getBookmarkJson(url, title, tags):
     bookmarkJson = dict(
         url = url,
@@ -56,6 +63,7 @@ def getBookmarkJson(url, title, tags):
     )
     return bookmarkJson
 
+
 def getTagsString(rowTags):
     if rowTags[0].find(',') > 0:
         tags = rowTags[0].split(',')
@@ -63,6 +71,6 @@ def getTagsString(rowTags):
         tags = rawTags
     return ' '.join(tags)
 
+
 if __name__ == '__main__':
-    app.debug = True
     app.run()
