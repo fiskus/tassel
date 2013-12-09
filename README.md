@@ -2,14 +2,14 @@
 
 * Install dependencies
 
-    $ npm install grunt --save-dev
+    `$ npm install grunt --save-dev`
 
 * Compile static
 
-    $ grunt
+    `$ grunt`
 
 * Start server
 
-    $ python2 bookmarks.py
+    `$ python2 bookmarks.py`
 
 * Open browser at http://localhost:5000/
