@@ -1,4 +1,4 @@
-# TODO =
+# TODO
 
 Rename to Tassel
 
@@ -9,7 +9,7 @@ Rename to Tassel
 * Export to HTML file
 * Store icon
 
-## Codebase improvements ==
+## Codebase improvements
 
 * Isolate edit form and add form classes.
 * Tests.
