@@ -11,7 +11,6 @@ Rename to Tassel
 
 ## Codebase improvements ==
 
-* Make live reload grunt server.
 * Isolate edit form and add form classes.
 * Tests.
-* Use jade for html-templating and handlebars for js-templating.
+* Use handlebars for js-templating.
