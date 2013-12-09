@@ -1,4 +1,4 @@
-class BookmarksController
+class TasselController
     constructor: () ->
         @initInput()
         subscribe 'rendered.renderer', _.bind(@initBookmarks, @)

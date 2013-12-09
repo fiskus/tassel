@@ -9,7 +9,7 @@
     l = subscribes.length
 
     while (l--)
-      subscribes[l].apply(@, data || []);
+      subscribes[l].apply(@, data || [])
 
   @.subscribe = (channel, handler) ->
     (channels[channel] = channels[channel] || []).push(handler)

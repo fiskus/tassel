@@ -1,5 +1,5 @@
 class Tassel
     constructor: () ->
-        controller = new BookmarksController()
-        renderer = new BookmarksRenderer()
-        model = new BookmarksModel()
+        controller = new TasselController()
+        renderer = new TasselRenderer()
+        model = new TasselModel()

@@ -1,4 +1,4 @@
-class BookmarksModel
+class TasselModel
     constructor: () ->
         @load()
         subscribe 'key.controller', _.bind(@onInput, @)

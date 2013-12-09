@@ -1,4 +1,4 @@
-class BookmarksRenderer
+class TasselRenderer
     constructor: () ->
         subscribe 'loaded.model', _.bind(@render, @)
         subscribe 'filtered.model', _.bind(@render, @)
