@@ -34,12 +34,17 @@ module.exports = function(grunt) {
                     '--minify'
                 ]
             }
+        },
+        watch: {
+            files: ['<%= coffee.build.src %>', 'static/js/<%= pkg.name %>.js', 'static/sass/*.sass'],
+            tasks: ['coffee', 'uglify', 'sass']
         }
     });
 
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-sass');
 
-    grunt.registerTask('default', ['coffee', 'uglify', 'sass']);
+    grunt.registerTask('default', ['watch', 'coffee', 'uglify', 'sass']);
 };
