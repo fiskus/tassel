@@ -4,13 +4,13 @@ import dataset
 app = Flask(__name__)
 app.jinja_env.add_extension('pyjade.ext.jinja.PyJadeExtension')
 
-db = dataset.connect('sqlite:///bookmarks.sqlite')
-table = db['bookmarks']
+db = dataset.connect('sqlite:///tassel.sqlite')
+table = db['tassel']
 
 
 @app.route('/')
 def index():
-    return render_template('bookmarks.jade')
+    return render_template('tassel.jade')
 
 
 @app.route('/get/', methods=['GET'])

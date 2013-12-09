@@ -11,7 +11,7 @@ module.exports = function(grunt) {
             }
         },
         uglify: {
-            bookmarks: {
+            tassel: {
                 files: {
                     'static/js/<%= pkg.name %>.min.js': ['static/js/<%= pkg.name %>.js']
                 }

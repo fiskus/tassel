@@ -1,9 +1,9 @@
 *.swp
 .sass-cache
-static/css/bookmarks.css
-static/js/bookmarks.js
-static/js/bookmarks.min.js
-static/js/bookmarks-libs.min.js
+static/css/tassel.css
+static/js/tassel.js
+static/js/tassel.min.js
+static/js/tassel-libs.min.js
 node_modules
 
 static/lib/json.js

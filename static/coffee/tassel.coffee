@@ -1,4 +1,4 @@
-class Bookmarks
+class Tassel
     constructor: () ->
         controller = new BookmarksController()
         renderer = new BookmarksRenderer()
