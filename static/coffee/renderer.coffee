@@ -2,30 +2,10 @@ class TasselRenderer
     constructor: () ->
         subscribe 'loaded.model', _.bind(@render, @)
         subscribe 'filtered.model', _.bind(@render, @)
-        subscribe 'url.controller', _.bind(@showMeta, @)
-        subscribe 'empty.controller', _.bind(@hideMeta, @)
-        subscribe 'key.controller', _.bind(@showClearLink, @)
-        subscribe 'empty.controller', _.bind(@hideClearLink, @)
         subscribe 'edit.controller', _.bind(@edit, @)
         subscribe 'remove.controller', _.bind(@remove, @)
         subscribe 'edit.model', _.bind(@onEditSuccess, @)
         publish 'inited.renderer'
-
-    showMeta: () ->
-        metaBox = document.querySelectorAll('.bookmark-meta')
-        metaBox[0].style.display = 'block'
-
-    hideMeta: () ->
-        metaBox = document.querySelectorAll('.bookmark-meta')
-        metaBox[0].style.display = 'none'
-
-    showClearLink: () ->
-        clearLink = document.querySelectorAll('.clear-search')
-        clearLink[0].style.display = 'block'
-
-    hideClearLink: () ->
-        clearLink = document.querySelectorAll('.clear-search')
-        clearLink[0].style.display = 'none'
 
     edit: (bookmark) ->
         url = bookmark.querySelectorAll('.bookmark-link')[0].getAttribute('href')

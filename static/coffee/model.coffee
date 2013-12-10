@@ -1,13 +1,17 @@
 class TasselModel
     constructor: () ->
         @load()
-        subscribe 'key.controller', _.bind(@onInput, @)
-        subscribe 'empty.controller', _.bind(@onEmptyInput, @)
+        subscribe 'key.searchbar', _.bind(@onInput, @)
+        subscribe 'empty.searchbar', _.bind(@onEmptyInput, @)
         subscribe 'enter.controller', _.bind(@processFirstBookmark, @)
-        subscribe 'add.controller', _.bind(@addFromInput, @)
         subscribe 'editsubmit.controller', _.bind(@edit, @)
         subscribe 'remove.renderer', _.bind(@remove, @)
+        subscribe 'add.formmodel', _.bind(@onAdd, @)
         publish 'inited.model'
+
+    onAdd: (bookmark) ->
+        #TODO: push at first position
+        @_bookmarks.push bookmark
 
     load: () ->
         url = '/get/'
@@ -65,9 +69,12 @@ class TasselModel
 
     processFirstBookmark: (isCtrlKey) ->
         bookmark = _.first(@getFiltered())
+        """
+        WTF?
         if !bookmark
             @addFromInput()
             return false
+        """
         url = bookmark.url
         publish 'first.model', [url, isCtrlKey]
         url
@@ -107,6 +114,7 @@ class TasselModel
                     serialized[name] = value
         serialized
 
+        """
     addFromInput: (event) ->
         bookmark = @serialize event.currentTarget
         bookmark = @validate bookmark
@@ -122,6 +130,7 @@ class TasselModel
         #TODO: push at first position
         @_bookmarks.push data.bookmark
         publish 'posted.model', [data.bookmark]
+        """
 
     edit: (event) ->
         bookmark = @serialize event.currentTarget

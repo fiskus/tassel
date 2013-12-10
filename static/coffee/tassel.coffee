@@ -1,5 +1,5 @@
 class Tassel
     constructor: () ->
-        controller = new TasselController()
-        renderer = new TasselRenderer()
-        model = new TasselModel()
+        new TasselController()
+        new TasselRenderer()
+        new TasselModel()
