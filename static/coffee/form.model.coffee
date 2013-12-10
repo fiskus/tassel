@@ -35,7 +35,7 @@ class FormModel
             isValid = false
         if !data.tags || !data.tags.length
             isValid = false
-        if isValid then data else false
+        if isValid then data else null
 
     onPost: (data) ->
-        publish 'add.formmodel', [data.bookmark]
+        publish 'add.form', [data.bookmark]

@@ -2,11 +2,11 @@ class TasselModel
     constructor: () ->
         @load()
         subscribe 'key.searchbar', _.bind(@onInput, @)
-        subscribe 'empty.searchbar', _.bind(@onEmptyInput, @)
-        subscribe 'enter.controller', _.bind(@processFirstBookmark, @)
+        subscribe 'empty.searchbar', _.bind(@onEmptySearch, @)
+        subscribe 'enter.searchbar', _.bind(@processFirstBookmark, @)
         subscribe 'editsubmit.controller', _.bind(@edit, @)
         subscribe 'remove.renderer', _.bind(@remove, @)
-        subscribe 'add.formmodel', _.bind(@onAdd, @)
+        subscribe 'add.form', _.bind(@onAdd, @)
         publish 'inited.model'
 
     onAdd: (bookmark) ->
@@ -37,7 +37,7 @@ class TasselModel
         bookmarks = _.compact bookmarks
         @setBookmarks bookmarks
 
-    onEmptyInput: (search) ->
+    onEmptySearch: (search) ->
         publish 'filtered.model', [@getBookmarks()]
 
     onInput: (search) ->
@@ -113,24 +113,6 @@ class TasselModel
                 else
                     serialized[name] = value
         serialized
-
-        """
-    addFromInput: (event) ->
-        bookmark = @serialize event.currentTarget
-        bookmark = @validate bookmark
-        if !bookmark
-            return false
-        url = '/add/'
-        options =
-            cache: true
-        onSuccess = _.bind(@onPost, @)
-        qwest.post(url, bookmark, options).success(onSuccess)
-
-    onPost: (data) ->
-        #TODO: push at first position
-        @_bookmarks.push data.bookmark
-        publish 'posted.model', [data.bookmark]
-        """
 
     edit: (event) ->
         bookmark = @serialize event.currentTarget
