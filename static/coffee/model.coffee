@@ -7,7 +7,6 @@ class TasselModel
         subscribe 'editsubmit.controller', _.bind(@edit, @)
         subscribe 'remove.renderer', _.bind(@remove, @)
         subscribe 'add.form', _.bind(@onAdd, @)
-        publish 'inited.model'
 
     onAdd: (bookmark) ->
         #TODO: push at first position

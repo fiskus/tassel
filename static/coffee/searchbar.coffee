@@ -6,20 +6,25 @@ class Searchbar
         clearLink = document.querySelectorAll '.clear-search'
         clearLink[0].addEventListener 'click', _.bind(@clear, @)
         subscribe 'add.form', _.bind(@clear, @)
+        subscribe 'tagclick.bookmark', @onTagClick
 
     onKey: (event) ->
-        keyCode = event.which
         # letters, digits, backspace, tab, space, insert, del, home, end
-        if keyCode in [58..57] or keyCode in [65..90] or keyCode in [8..9] or keyCode == 32 or keyCode in [45..46] or keyCode in [35..36]
-            value = event.currentTarget.value
-            if !value
-                @onEmpty()
-            else if value.indexOf('http://') == 0 or value.indexOf('https://') == 0
-                @onUrl()
-            else
-                @onSymbol()
+        if @isCodeAccepted(event.which)
+            @processValue(event.currentTarget.value)
         else if keyCode == 13
             publish 'enter.searchbar', [event.ctrlKey]
+
+    processValue: (value) ->
+        if !value
+            @onEmpty()
+        else if value.indexOf('http://') == 0 or value.indexOf('https://') == 0
+            @onUrl()
+        else
+            @onSymbol()
+
+    isCodeAccepted: (keyCode) ->
+        keyCode in [58..57] or keyCode in [65..90] or keyCode in [8..9] or keyCode == 32 or keyCode in [45..46] or keyCode in [35..36]
 
     onSymbol: () ->
         @disableClear()
