@@ -33,3 +33,5 @@
     `$ python2 tassel.py`
 
 * Open browser at http://localhost:5000/
+
+* Open docs at `docs/index.html`
