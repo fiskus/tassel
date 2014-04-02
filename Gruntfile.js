@@ -2,12 +2,16 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         coffee: {
-            options: {
-                bare: true
-            },
-            build: {
-                src: 'coffee/*.coffee',
-                dest: 'static/js/<%= pkg.name %>.js'
+            compile: {
+                options: {
+                    bare: true,
+                },
+                files: {
+                    'static/js/<%= pkg.name %>.js': [
+                        'coffee/*.coffee',
+                        'coffee/*/*.coffee',
+                    ]
+                }
             }
         },
         stylus: {
@@ -20,12 +24,17 @@ module.exports = function(grunt) {
         uglify: {
             tassel: {
                 files: {
-                    'static/js/<%= pkg.name %>.min.js': ['static/js/<%= pkg.name %>.js']
+                    'static/js/<%= pkg.name %>.min.js': [
+                        'static/js/<%= pkg.name %>.js',
+                    ]
                 }
             },
             libs: {
                 files: {
-                    'static/js/<%= pkg.name %>-libs.min.js': ['static/lib/lodash.js', 'static/lib/qwest.js']
+                    'static/js/<%= pkg.name %>-libs.min.js': [
+                        'static/lib/lodash.js',
+                        'static/lib/qwest.js',
+                    ]
                 }
             }
         },
@@ -39,7 +48,7 @@ module.exports = function(grunt) {
                 tasks: ['uglify:libs']
             },
             coffee: {
-                files: ['<%= coffee.build.src %>'],
+                files: ['coffee/*.coffee', 'coffee/*/*.coffee'],
                 tasks: ['coffee', 'uglify:tassel']
             }
         }
@@ -50,5 +59,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['coffee', 'stylus', 'watch']);
+    grunt.registerTask('default', ['coffee', 'stylus', 'uglify', 'watch']);
 };
