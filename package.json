@@ -6,6 +6,7 @@
     "grunt-contrib-watch": "~0.5.2",
     "grunt-contrib-coffee": "~0.7.0",
     "grunt-contrib-uglify": "~0.2.2",
-    "grunt-contrib-stylus": "^0.13.2"
+    "grunt-contrib-stylus": "^0.13.2",
+    "grunt-codo": "^0.1.0"
   }
 }

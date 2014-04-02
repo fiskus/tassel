@@ -8,6 +8,7 @@ class TasselModel
         subscribe 'remove.renderer', _.bind(@remove, @)
         subscribe 'add.form', _.bind(@onAdd, @)
 
+    # @param bookmark [Object]
     onAdd: (bookmark) ->
         #TODO: push at first position
         @_bookmarks.push bookmark
@@ -19,11 +20,13 @@ class TasselModel
         onSuccess = _.bind(@save, @)
         qwest.get(url, {}, options).success(onSuccess)
 
+    # @param data [Object]
     save: (data) ->
         bookmarks = data.bookmarks.reverse()
         @setBookmarks bookmarks
         publish 'loaded.model', [bookmarks]
 
+    # @param url [String]
     remove: (url) ->
         bookmarks = _.clone @getBookmarks()
         index = _.findIndex bookmarks, (bookmark) ->
@@ -43,6 +46,7 @@ class TasselModel
         values = search.split(' ')
         @search values
 
+    # @param values [Array]
     search: (values) ->
         rawResults = _.map values, @filter, @
         allResults = _.flatten(rawResults, true)

@@ -14,6 +14,15 @@ module.exports = function(grunt) {
                 }
             }
         },
+        codo: {
+            options: {
+                title: "Tassel. Simple bookmarks server",
+                output: 'docs',
+                inputs: [
+                    'coffee'
+                ]
+            }
+        },
         stylus: {
             compile: {
                 files: {
@@ -58,6 +67,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-stylus');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-codo');
 
-    grunt.registerTask('default', ['coffee', 'stylus', 'uglify', 'watch']);
+    grunt.registerTask('default', ['coffee', 'codo', 'stylus', 'uglify', 'watch']);
 };
