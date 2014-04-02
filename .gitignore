@@ -1,15 +1,10 @@
 *.swp
-.sass-cache
-static/css/tassel.css
-static/js/tassel.js
-static/js/tassel.min.js
-static/js/tassel-libs.min.js
+static/css
+static/js
 node_modules
-
 static/lib/json.js
 static/lib/store.js
 *.sqlite
-
 bin
 include
 lib
