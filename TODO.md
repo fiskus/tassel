@@ -1,7 +1,5 @@
 # TODO
 
-Rename to Tassel
-
 ## Features
 
 * Use localStorage and make it usable offline.
