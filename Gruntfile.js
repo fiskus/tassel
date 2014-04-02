@@ -10,17 +10,11 @@ module.exports = function(grunt) {
                 dest: 'static/js/<%= pkg.name %>.js'
             }
         },
-        sass: {
-            dist: {
-                options: {
-                    style: 'compressed'
-                },
+        stylus: {
+            compile: {
                 files: {
-                    'static/css/<%= pkg.name %>.css': 'sass/<%= pkg.name %>.sass'
-                },
-                flags: [
-                    '--minify'
-                ]
+                    'static/css/<%= pkg.name %>.css': 'stylus/<%= pkg.name %>.styl',
+                }
             }
         },
         uglify: {
@@ -36,15 +30,15 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            files: ['<%= coffee.build.src %>', 'static/js/<%= pkg.name %>.js', 'static/sass/*.sass'],
-            tasks: ['coffee', 'uglify', 'sass']
+            files: ['<%= coffee.build.src %>', 'static/js/<%= pkg.name %>.js', 'stylus/*.styl'],
+            tasks: ['coffee', 'uglify', 'stylus']
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-stylus');
 
-    grunt.registerTask('default', ['coffee', 'sass', 'watch']);
+    grunt.registerTask('default', ['coffee', 'stylus', 'watch']);
 };

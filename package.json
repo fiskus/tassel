@@ -1,11 +1,11 @@
 {
-    "name": "tassel",
-    "version": "0.0.1",
-    "devDependencies": {
-        "grunt": "~0.4.2",
-        "grunt-contrib-watch": "~0.5.2",
-        "grunt-contrib-coffee": "~0.7.0",
-        "grunt-contrib-uglify": "~0.2.2",
-        "grunt-contrib-sass": "~0.5.0"
-    }
+  "name": "tassel",
+  "version": "0.0.1",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-watch": "~0.5.2",
+    "grunt-contrib-coffee": "~0.7.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-stylus": "^0.13.2"
+  }
 }
