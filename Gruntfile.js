@@ -6,8 +6,21 @@ module.exports = function(grunt) {
                 bare: true
             },
             build: {
-                src: 'static/coffee/*.coffee',
+                src: 'coffee/*.coffee',
                 dest: 'static/js/<%= pkg.name %>.js'
+            }
+        },
+        sass: {
+            dist: {
+                options: {
+                    style: 'compressed'
+                },
+                files: {
+                    'static/css/<%= pkg.name %>.css': 'sass/<%= pkg.name %>.sass'
+                },
+                flags: [
+                    '--minify'
+                ]
             }
         },
         uglify: {
@@ -20,19 +33,6 @@ module.exports = function(grunt) {
                 files: {
                     'static/js/<%= pkg.name %>-libs.min.js': ['static/lib/lodash.js', 'static/lib/qwest.js']
                 }
-            }
-        },
-        sass: {
-            dist: {
-                options: {
-                    style: 'compressed'
-                },
-                files: {
-                    'static/css/<%= pkg.name %>.css': 'static/sass/<%= pkg.name %>.sass'
-                },
-                flags: [
-                    '--minify'
-                ]
             }
         },
         watch: {
