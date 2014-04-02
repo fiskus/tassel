@@ -9,7 +9,6 @@
 
 ## Codebase improvements
 
-* Source maps for coffeescript
 * Isolate edit form and add form classes.
 * Tests.
 * Use handlebars for js-templating.

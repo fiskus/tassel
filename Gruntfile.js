@@ -5,6 +5,7 @@ module.exports = function(grunt) {
             compile: {
                 options: {
                     bare: true,
+                    sourceMap: true
                 },
                 files: {
                     'static/js/<%= pkg.name %>.js': [
