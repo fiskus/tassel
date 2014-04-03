@@ -8,8 +8,6 @@
     "grunt-contrib-handlebars": "^0.7.0",
     "grunt-contrib-stylus": "^0.13.2",
     "grunt-contrib-uglify": "^0.4.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "handlebars-runtime": "^1.0.12",
-    "lodash": "^2.4.1"
+    "grunt-contrib-watch": "^0.6.1"
   }
 }

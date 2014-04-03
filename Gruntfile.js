@@ -45,6 +45,10 @@ module.exports = function(grunt) {
             }
         },
         uglify: {
+            options: {
+                sourceMap: true,
+                wrap: false
+            },
             tassel: {
                 files: {
                     'static/js/<%= pkg.name %>.min.js': [

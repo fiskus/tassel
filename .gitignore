@@ -8,5 +8,3 @@ node_modules
 static/css
 static/js
 static/jst
-static/lib/json.js
-static/lib/store.js
