@@ -24,6 +24,18 @@ module.exports = function(grunt) {
                 ]
             }
         },
+        handlebars: {
+            compile: {
+                options: {
+                    namespace: 'JST'
+                },
+                files: {
+                    'static/jst/<%= pkg.name %>.js': [
+                        'handlebars/form.hbs',
+                    ]
+                }
+            }
+        },
         stylus: {
             compile: {
                 files: {
@@ -46,6 +58,11 @@ module.exports = function(grunt) {
                         'static/lib/qwest.js',
                     ]
                 }
+            },
+            templates: {
+                files: {
+                    'static/jst/<%= pkg.name %>.js': 'static/jst/<%= pkg.name %>.js',
+                }
             }
         },
         watch: {
@@ -65,10 +82,11 @@ module.exports = function(grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-coffee');
+    grunt.loadNpmTasks('grunt-contrib-handlebars');
     grunt.loadNpmTasks('grunt-contrib-stylus');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-codo');
 
-    grunt.registerTask('default', ['coffee', 'codo', 'stylus', 'uglify', 'watch']);
+    grunt.registerTask('default', ['coffee', 'handlebars', 'codo', 'stylus', 'uglify', 'watch']);
 };
