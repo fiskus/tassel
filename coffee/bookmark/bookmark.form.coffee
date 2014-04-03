@@ -1,6 +1,7 @@
 class BookmarkForm
     TEMPLATE: JST['handlebars/form.hbs']
 
+
     # @param wrapper {DOM Element}
     # @param data {Object}
     constructor: (wrapper, data) ->

@@ -1,4 +1,7 @@
 class Bookmark
+    TEMPLATE: JST['handlebars/bookmark.hbs']
+
+
     # @param data [Object]
     constructor: (data) ->
         @_data = data
@@ -16,23 +19,7 @@ class Bookmark
         @_wrapper.addEventListener 'click', _.bind(@onClick, @)
 
     getHtml: () ->
-        template = [
-            '<a class="bookmark-link" href="<%= url %>"><%= title %></a>',
-            '<ul class="bookmark-tags">',
-                '<% _.each(tags, function(tag) { %>',
-                    '<li class="bookmark-tag-item">',
-                        '<a class="bookmark-tag-link" href="#<%= tag %>">',
-                            '<%= tag %>',
-                        '</a>',
-                    '</li>',
-                '<% }); %>',
-            '</ul>',
-            '<span class="bookmark-control">'
-                '<button class="bookmark-edit">✎</button>',
-                '<button class="bookmark-remove">⊗</button>',
-            '</span>'
-        ]
-        _.template template.join(''), @_data
+        @TEMPLATE @_data
 
     # @param event [Event]
     onClick: (event) ->

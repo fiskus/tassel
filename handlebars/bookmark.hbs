@@ -1,0 +1,12 @@
+<a class="bookmark-link" href="{{ url }}">{{ title }}</a>
+<ul class="bookmark-tags">
+    {{#each tags }}
+        <li class="bookmark-tag-item">
+            <a class="bookmark-tag-link" href="#{{ this }}">{{ this }}</a>
+        </li>
+    {{/each}}
+</ul>
+<span class="bookmark-control">'
+    <button class="bookmark-edit">✎</button>
+    <button class="bookmark-remove">⊗</button>
+</span>
