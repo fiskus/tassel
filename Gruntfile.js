@@ -31,6 +31,7 @@ module.exports = function(grunt) {
                 },
                 files: {
                     'static/jst/<%= pkg.name %>.js': [
+                        'handlebars/bookmark.hbs',
                         'handlebars/form.hbs',
                     ]
                 }
@@ -54,7 +55,7 @@ module.exports = function(grunt) {
             libs: {
                 files: {
                     'static/js/<%= pkg.name %>-libs.min.js': [
-                        'static/lib/lodash.js',
+                        'static/lib/bundle.js',
                         'static/lib/qwest.js',
                     ]
                 }

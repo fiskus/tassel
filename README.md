@@ -8,6 +8,14 @@
 
     `$ npm install`
 
+* Install browserify
+
+    `# npm install -g browserify`
+
+* Build javascript libraries
+
+    `$ browserify setup.js > static/lib/bundle.js`
+
 * Compile static
 
     `$ grunt`
