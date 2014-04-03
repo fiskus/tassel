@@ -1,4 +1,6 @@
 class BookmarkForm
+    # @param wrapper {DOM Element}
+    # @param data {Object}
     constructor: (wrapper, data) ->
         @_wrapper = wrapper
         @_data = data
@@ -21,6 +23,7 @@ class BookmarkForm
         form = @_wrapper.querySelectorAll('.bookmark-form')[0]
         form.addEventListener 'submit', _.bind(@onSubmit, @)
 
+    # @param event {Event}
     onSubmit: (event) ->
         event.preventDefault()
         publish 'edit.bookmark'

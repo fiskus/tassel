@@ -1,4 +1,5 @@
 class Bookmark
+    # @param data [Object]
     constructor: (data) ->
         @_data = data
         @init()
@@ -33,6 +34,7 @@ class Bookmark
         ]
         _.template template.join(''), @_data
 
+    # @param event [Event]
     onClick: (event) ->
         element = event.target
         switch element.className
@@ -42,6 +44,7 @@ class Bookmark
             #TODO
             #else @onLinkClick(event.ctrlKey)
 
+    # @param element [DOM Element]
     onTagClick: (element) ->
         tag = element.textContent
         publish 'tagclick.bookmark', [tag]
@@ -55,8 +58,10 @@ class Bookmark
         @_wrapper.remove()
         #publish 'remove.bookmark', [@_data.url]
 
+    ###
     onLinkClick: (isCtrlKey) ->
         if (isCtrlKey)
             window.open @_data.url
         else
             window.location = @_data.url
+    ###

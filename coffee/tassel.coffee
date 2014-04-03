@@ -7,9 +7,11 @@ class Tassel
         new Searchbar
         new TasselModel()
 
-        renderBookmarks = (bookmarks) ->
-            _.each bookmarks, (data) ->
-                new Bookmark(data)
+        subscribe 'loaded.model', _.bind(@renderBookmarks, @)
+        subscribe 'filtered.model', _.bind(@renderBookmarks, @)
 
-        subscribe 'loaded.model', renderBookmarks
-        subscribe 'filtered.model', renderBookmarks
+
+    # @param bookmarks [Array]
+    renderBookmarks: (bookmarks) ->
+        _.each bookmarks, (data) ->
+            new Bookmark(data)
